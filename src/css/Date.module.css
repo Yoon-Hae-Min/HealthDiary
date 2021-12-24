@@ -1,0 +1,9 @@
+.today::before {
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  content: "";
+}
