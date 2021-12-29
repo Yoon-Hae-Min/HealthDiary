@@ -1,89 +1,54 @@
 import Date from "component/Date";
 import TodayToDo from "component/TodayToDo";
 import Week from "component/Week";
+import useCalender from "Hook/useCalender";
 import moment from "moment";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import style from "../css/Calender.module.css";
 
-const getCalender = (month) => {
-  //logic을 수정해서 hook으로 만들어야함
-  const calenderArr = [];
-  const currentYear = moment().year();
-  const firstDayOfThisMonth = moment([currentYear, month, 1]).day();
-  const lastDayOfThisMonth = moment([currentYear, 0, 31]).month(month).day();
-  const lastDateOfLastMonth = moment([currentYear, 0, 31])
-    .month(month - 1)
-    .date();
-  const lastDateOfThisMonth = moment([currentYear, 0, 31]).month(month).date();
-  // const lastDateOfCurrMonth;
-  //console.log(firstDayOfThisMonth);
-  //console.log(lastDayOfThisMonth);
-  //console.log(lastDateOfLastMonth);
-
-  const getDatesOfCurrentMonth = () => {
-    //return해야함
-    pushArrOfLastDates();
-    pushArrOfCurrentDates();
-    pushArrOfNextDates();
-  };
-  const pushArrOfLastDates = () => {
-    let lastDates = lastDateOfLastMonth - firstDayOfThisMonth + 1;
-    while (lastDates <= lastDateOfLastMonth) {
-      calenderArr.push([lastDates, `${currentYear}${month}${lastDates}`]);
-      lastDates += 1;
-    }
-  };
-  const pushArrOfCurrentDates = () => {
-    for (let i = 1; i <= lastDateOfThisMonth; i++) {
-      calenderArr.push([i, `${currentYear}${month + 1}${i}`]);
-    }
-  };
-  const pushArrOfNextDates = () => {
-    for (let i = 1; i <= 6 - lastDayOfThisMonth; i++) {
-      calenderArr.push([i, `${currentYear}${month + 2}${i}`]);
-    }
-  };
-  getDatesOfCurrentMonth();
-  return calenderArr;
-};
-
 const Calender = () => {
+  // 지금 달력이 안나옴
   const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
-  const [currentMonth, setCurrentMonth] = useState(moment().month());
-  const [currentYear, setCurrentYear] = useState(moment().years());
-  const [calender, setCalender] = useState(getCalender(currentMonth));
+  const { date, setDate, getDatesOfCurrentMonth } = useCalender(); //month가 하루씩 당겨짐 ex 12월은 11월
   const today = moment().format("YYYYMMD");
-  const [clickDate, setClickDate] = useState(today);
+  const [clickedDate, setClickedDate] = useState(date);
+
   const LastMonthClick = () => {
-    if (currentMonth <= 0) {
-      setCurrentMonth(11);
-      setCurrentYear((pre) => pre - 1);
+    if (date.month <= 0) {
+      setDate((pre) => ({ year: pre.year - 1, month: 11, date: pre.date }));
     } else {
-      setCurrentMonth((current) => current - 1);
+      setDate((pre) => ({
+        year: pre.year,
+        month: pre.month - 1,
+        date: pre.date,
+      }));
     }
   };
 
   const NextMonthClick = () => {
-    if (currentMonth >= 11) {
-      setCurrentMonth(0);
-      setCurrentYear((pre) => pre + 1);
+    if (date.month >= 11) {
+      setDate((pre) => ({ year: pre.year + 1, month: 0, date: pre.date }));
     } else {
-      setCurrentMonth((current) => current + 1);
+      setDate((pre) => ({
+        year: pre.year,
+        month: pre.month + 1,
+        date: pre.date,
+      }));
     }
   };
-  useEffect(() => {
-    setCalender(getCalender(currentMonth));
-  }, [currentMonth]);
 
-  const DateClick = (event) => {
-    setClickDate(event.target.id);
+  // useEffect(() => {
+  //   setCalender(getCalender(currentMonth));
+  // }, [currentMonth]);
+  const DateClick = (date) => {
+    setClickedDate(date);
   };
   return (
     <div className={style.container}>
-      <span>{currentYear}년</span>
+      <span>{date.year}년</span>
       <div>
         <button onClick={LastMonthClick}>←</button>
-        <span>{currentMonth + 1}월</span>
+        <span>{date.month + 1}월</span>
         <button onClick={NextMonthClick}>→</button>
       </div>
       <div className={style.calender}>
@@ -92,7 +57,17 @@ const Calender = () => {
         ))}
       </div>
       <div className={style.date}>
-        {calender.map((date, index) => (
+        {getDatesOfCurrentMonth().map((eachDate, index) => (
+          <Date
+            date={eachDate}
+            istoday={
+              date.month === eachDate.month && date.date === eachDate.date
+            }
+            key={index}
+            DateClick={DateClick}
+          />
+        ))}
+        {/* {calender.map((date, index) => (
           <Date
             date={date[0]}
             istoday={today === date[1]}
@@ -100,9 +75,9 @@ const Calender = () => {
             key={index}
             onClick={DateClick}
           />
-        ))}
+        ))} */}
       </div>
-      <TodayToDo date={clickDate} />
+      <TodayToDo date={clickedDate} />
     </div>
   );
 };

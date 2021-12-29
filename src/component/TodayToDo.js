@@ -11,7 +11,7 @@ const TodayToDo = ({ date }) => {
   };
   return (
     <div>
-      <span>{date}</span>
+      <span>{`${date.year}년 ${date.month + 1}월 ${date.date}일`}</span>
       <button onClick={toggleModifyMode}>수정하기</button>
       <ModifyTodayToDo
         modifyMode={modifyMode}
