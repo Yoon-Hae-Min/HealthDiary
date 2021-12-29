@@ -1,25 +1,48 @@
-import { useState } from "react";
-import Modal from "react-modal";
+import { useEffect, useState } from "react";
 import ModifyTodayToDo from "./ModifyTodayToDo";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "fbase";
 
-const TodayToDo = ({ date }) => {
-  // 데이터 구조를 DICTIONARY형태로 해서 PROPS로 줄것
-  //database에서 main운동 및 한 운동일지를 가져와서 mapping해야함
+const TodayToDo = ({ date, userObj }) => {
+  //기록을 입력을 하고나서 바로 그날짜에 적용이안되고 한번 다시 눌러야 적용이됨
+  const [workoutDB, setWorkoutDB] = useState({
+    workoutPart: "",
+    workoutMemo: "",
+  });
   const [modifyMode, setModifyMode] = useState(false);
   const toggleModifyMode = () => {
     setModifyMode((pre) => !pre);
   };
+  useEffect(() => {
+    const getData = async () => {
+      console.log(JSON.stringify(date));
+      const docRef = doc(db, userObj.uid, JSON.stringify(date));
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setWorkoutDB(docSnap.data());
+      } else {
+        setWorkoutDB({ workoutPart: "", workoutMemo: "" });
+      }
+    };
+    getData();
+  }, [date]);
+  console.log(workoutDB);
   return (
     <div>
       <span>{`${date.year}년 ${date.month + 1}월 ${date.date}일`}</span>
-      <button onClick={toggleModifyMode}>수정하기</button>
+      <button onClick={toggleModifyMode}>기록하기</button>
       <ModifyTodayToDo
+        userObj={userObj}
+        date={date}
         modifyMode={modifyMode}
         toggleModifyMode={toggleModifyMode}
       />
-      <ul>
-        <li>1</li>
-      </ul>
+      <div>
+        <span>{`운동부위: ${workoutDB.workoutPart}`}</span>
+      </div>
+      <div>
+        <span>{`메모: ${workoutDB.workoutMemo}`}</span>
+      </div>
     </div>
   );
 };

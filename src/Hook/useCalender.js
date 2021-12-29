@@ -2,6 +2,7 @@ import moment from "moment";
 import { useState } from "react";
 
 const useCalender = () => {
+  // user정보를 쭉 끌고와야함
   const currentDate = {
     year: moment().year(),
     month: moment().month(),
@@ -14,7 +15,6 @@ const useCalender = () => {
       ...pushArrOfCurrentDates(),
       ...pushArrOfNextDates(),
     ];
-    console.log(calenderArr);
     return calenderArr;
   };
 
@@ -26,10 +26,6 @@ const useCalender = () => {
   const lastDateOfThisMonth = moment([date.year, 0, 31])
     .month(date.month)
     .date();
-  // const lastDateOfCurrMonth;
-  //console.log(firstDayOfThisMonth);
-  //console.log(lastDayOfThisMonth);
-  //console.log(lastDateOfLastMonth);
 
   const pushArrOfLastDates = () => {
     let lastDates = lastDateOfLastMonth - firstDayOfThisMonth + 1;

@@ -5,12 +5,12 @@ import Login from "routes/Login";
 import { auth } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
 
-const HealthDiaryRouter = ({ isLogin }) => {
+const HealthDiaryRouter = ({ isLogin, userObj }) => {
   return (
     <Router>
       <Routes>
         {isLogin ? (
-          <Route path="/" element={<Calender />}></Route>
+          <Route path="/" element={<Calender userObj={userObj} />}></Route>
         ) : (
           <Route path="/" element={<Login />}></Route>
         )}
