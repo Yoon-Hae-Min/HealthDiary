@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { auth } from "fbase";
 
-const Login = () => {
+const Login = ({ refreshUser }) => {
   const [createAccount, setCreateAccount] = useState(true);
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -45,7 +45,6 @@ const Login = () => {
     const provider = new FacebookAuthProvider();
     await signInWithPopup(auth, provider);
   };
-  console.log(password);
   return (
     <div>
       <form onSubmit={AccountSubmit}>

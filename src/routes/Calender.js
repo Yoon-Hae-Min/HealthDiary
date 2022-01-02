@@ -2,12 +2,18 @@ import Date from "component/Date";
 import TodayToDo from "component/TodayToDo";
 import Week from "component/Week";
 import useCalender from "Hook/useCalender";
+import moment from "moment";
 import { useState } from "react";
 import style from "../css/Calender.module.css";
 
 const Calender = ({ userObj }) => {
   const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
   const { date, setDate, getDatesOfCurrentMonth } = useCalender(); //month가 하루씩 당겨짐 ex 12월은 11월
+  const today = {
+    year: moment().year(),
+    month: moment().month(),
+    date: moment().date(),
+  };
   const [clickedDate, setClickedDate] = useState(date);
   const LastMonthClick = () => {
     if (date.month <= 0) {
@@ -35,6 +41,7 @@ const Calender = ({ userObj }) => {
   const DateClick = (date) => {
     setClickedDate(date);
   };
+  console.log(date);
   return (
     <>
       {userObj && (
@@ -55,7 +62,9 @@ const Calender = ({ userObj }) => {
               <Date
                 date={eachDate}
                 istoday={
-                  date.month === eachDate.month && date.date === eachDate.date
+                  today.year === eachDate.year &&
+                  today.month === eachDate.month &&
+                  today.date === eachDate.date
                 }
                 key={index}
                 DateClick={DateClick}

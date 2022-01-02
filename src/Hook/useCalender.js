@@ -5,7 +5,7 @@ const useCalender = () => {
   // user정보를 쭉 끌고와야함
   const currentDate = {
     year: moment().year(),
-    month: moment().month(),
+    month: moment().month(), //현제 나타내는 개월보다 1작음
     date: moment().date(),
   };
   const [date, setDate] = useState(currentDate);
@@ -29,14 +29,16 @@ const useCalender = () => {
 
   const pushArrOfLastDates = () => {
     let lastDates = lastDateOfLastMonth - firstDayOfThisMonth + 1;
-    const isJanuary = date.month === 1;
+    const isJanuary = date.month === 0;
     let lastMonth = date.month - 1;
+    let lastYear = date.year;
     if (isJanuary) {
-      lastMonth = 12;
+      lastMonth = 11;
+      lastYear -= 1;
     }
     const emptyArr = new Array(firstDayOfThisMonth);
     for (let i = 0; i < firstDayOfThisMonth; i++) {
-      emptyArr[i] = { year: date.year, month: lastMonth, date: lastDates }; //1월일때 0이 나옴
+      emptyArr[i] = { year: lastYear, month: lastMonth, date: lastDates }; //1월일때 0이 나옴
       lastDates += 1;
     }
     return emptyArr;
@@ -49,14 +51,16 @@ const useCalender = () => {
     return emptyArr;
   };
   const pushArrOfNextDates = () => {
-    const isDecember = date.month === 12;
+    const isDecember = date.month === 11;
     let nextMonth = date.month + 1;
+    let nextYear = date.year;
     if (isDecember) {
-      nextMonth = 1;
+      nextMonth = 0;
+      nextYear += 1;
     }
     const emptyArr = new Array(6 - lastDayOfThisMonth);
     for (let i = 1; i <= 6 - lastDayOfThisMonth; i++) {
-      emptyArr[i - 1] = { ...date, month: nextMonth, date: i };
+      emptyArr[i - 1] = { year: nextYear, month: nextMonth, date: i };
     }
     return emptyArr;
   };

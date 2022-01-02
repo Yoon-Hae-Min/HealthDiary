@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ModifyTodayToDo from "./ModifyTodayToDo";
+import ModifyTodayToDo from "./modal/ModifyTodayToDo";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "fbase";
 
@@ -10,13 +10,20 @@ const TodayToDo = ({ date, userObj }) => {
     workoutMemo: "",
   });
   const [modifyMode, setModifyMode] = useState(false);
+  const [DBInit, setDBInit] = useState(false);
   const toggleModifyMode = () => {
     setModifyMode((pre) => !pre);
   };
   useEffect(() => {
     const getData = async () => {
       console.log(JSON.stringify(date));
-      const docRef = doc(db, userObj.uid, JSON.stringify(date));
+      const docRef = doc(
+        db,
+        userObj.uid,
+        "Calender",
+        "record",
+        JSON.stringify(date)
+      );
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setWorkoutDB(docSnap.data());
@@ -25,18 +32,21 @@ const TodayToDo = ({ date, userObj }) => {
       }
     };
     getData();
+    setDBInit(true);
   }, [date]);
-  console.log(workoutDB);
   return (
     <div>
       <span>{`${date.year}년 ${date.month + 1}월 ${date.date}일`}</span>
       <button onClick={toggleModifyMode}>기록하기</button>
-      <ModifyTodayToDo
-        userObj={userObj}
-        date={date}
-        modifyMode={modifyMode}
-        toggleModifyMode={toggleModifyMode}
-      />
+      {DBInit && (
+        <ModifyTodayToDo
+          userObj={userObj}
+          date={date}
+          modifyMode={modifyMode}
+          toggleModifyMode={toggleModifyMode}
+        />
+      )}
+
       <div>
         <span>{`운동부위: ${workoutDB.workoutPart}`}</span>
       </div>

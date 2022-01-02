@@ -6,7 +6,7 @@ function App() {
   const [userObj, setUserObj] = useState(null);
   const [isLogin, setIsLogin] = useState(auth.currentUser);
   const [firebaseInitalized, setFirebaseInitalized] = useState(false);
-  console.log(auth.currentUser);
+  console.log(auth.currentUser); //3번이나 랜더링이 다시되는데?>
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -23,10 +23,23 @@ function App() {
       setFirebaseInitalized(true);
     });
   }, []);
+  const refreshUser = () => {
+    const user = auth.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      uid: user.uid,
+      photoURL: user.photoURL,
+      updateProfile: (args) => user.updateProfile(args),
+    });
+  };
   return (
     <div>
       {firebaseInitalized ? (
-        <HealthDiaryRouter isLogin={isLogin} userObj={userObj} />
+        <HealthDiaryRouter
+          isLogin={isLogin}
+          userObj={userObj}
+          refreshUser={refreshUser}
+        />
       ) : (
         "Initailized"
       )}

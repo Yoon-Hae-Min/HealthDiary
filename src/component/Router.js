@@ -4,15 +4,17 @@ import Calender from "routes/Calender";
 import Login from "routes/Login";
 import { auth } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
+import Navigator from "routes/Navigator";
 
-const HealthDiaryRouter = ({ isLogin, userObj }) => {
+const HealthDiaryRouter = ({ userObj, refreshUser }) => {
   return (
     <Router>
+      {userObj && <Navigator userObj={userObj} refreshUser={refreshUser} />}
       <Routes>
-        {isLogin ? (
+        {userObj ? (
           <Route path="/" element={<Calender userObj={userObj} />}></Route>
         ) : (
-          <Route path="/" element={<Login />}></Route>
+          <Route path="/" element={<Login refreshUser={refreshUser} />}></Route>
         )}
       </Routes>
     </Router>

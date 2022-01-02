@@ -4,12 +4,19 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "fbase";
 
 const ModifyTodayToDo = ({ modifyMode, toggleModifyMode, userObj, date }) => {
+  //같은 부분 클릭하면 랜더링하는것 막기
   const [workoutPart, setWorkoutPart] = useState("");
   const [workoutMemo, setWorkoutMemo] = useState("");
   const onSubmut = async (event) => {
     event.preventDefault();
     try {
-      const docRef = doc(db, userObj.uid, JSON.stringify(date));
+      const docRef = doc(
+        db,
+        userObj.uid,
+        "Calender",
+        "record",
+        JSON.stringify(date)
+      );
       setDoc(docRef, {
         workoutPart: workoutPart,
         workoutMemo: workoutMemo,
