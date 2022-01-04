@@ -9,13 +9,23 @@ const useCalender = () => {
     date: moment().date(),
   };
   const [date, setDate] = useState(currentDate);
+
   const getDatesOfCurrentMonth = () => {
     const calenderArr = [
       ...pushArrOfLastDates(),
       ...pushArrOfCurrentDates(),
       ...pushArrOfNextDates(),
     ];
-    return calenderArr;
+    const returnArr = new Array(calenderArr.length / 7);
+    for (let i = 0; i < returnArr.length; i++) {
+      returnArr[i] = new Array(7);
+    }
+    for (let i = 0; i < calenderArr.length / 7; i++) {
+      for (let j = 0; j < 7; j++) {
+        returnArr[i][j] = calenderArr[i * 7 + j];
+      }
+    }
+    return returnArr;
   };
 
   const firstDayOfThisMonth = moment([date.year, date.month, 1]).day();

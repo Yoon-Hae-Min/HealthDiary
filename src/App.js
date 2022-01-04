@@ -2,6 +2,7 @@ import HealthDiaryRouter from "component/Router";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "fbase";
+import { Container } from "react-bootstrap";
 function App() {
   const [userObj, setUserObj] = useState(null);
   const [isLogin, setIsLogin] = useState(auth.currentUser);
@@ -33,7 +34,7 @@ function App() {
     });
   };
   return (
-    <div>
+    <>
       {firebaseInitalized ? (
         <HealthDiaryRouter
           isLogin={isLogin}
@@ -43,7 +44,7 @@ function App() {
       ) : (
         "Initailized"
       )}
-    </div>
+    </>
   );
 }
 

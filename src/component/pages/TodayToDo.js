@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ModifyTodayToDo from "./modal/ModifyTodayToDo";
+import ModifyTodayToDo from "../modal/ModifyTodayToDo";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "fbase";
 
@@ -16,7 +16,6 @@ const TodayToDo = ({ date, userObj }) => {
   };
   useEffect(() => {
     const getData = async () => {
-      console.log(JSON.stringify(date));
       const docRef = doc(
         db,
         userObj.uid,
