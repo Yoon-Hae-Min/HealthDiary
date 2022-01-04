@@ -73,7 +73,7 @@ const Calender = ({ userObj }) => {
             </Row>
             <Row style={{ height: "100vh" }}>
               <Col md>
-                <Row className="justify-content-center text-center border-bottom">
+                <Row className="text-center border-bottom">
                   {weekArr.map((week, index) => (
                     <Col style={{ padding: 0 }}>
                       <Week name={week} key={index} />
@@ -81,7 +81,7 @@ const Calender = ({ userObj }) => {
                   ))}
                 </Row>
                 {getDatesOfCurrentMonth().map((weeks) => (
-                  <Row className="border-bottom">
+                  <Row className="align-items-start border-bottom">
                     {weeks.map((eachDate, index) => (
                       <Col style={{ padding: 0 }}>
                         <Date
@@ -91,6 +91,7 @@ const Calender = ({ userObj }) => {
                             today.month === eachDate.month &&
                             today.date === eachDate.date
                           }
+                          userObj={userObj}
                           key={index}
                           DateClick={DateClick}
                         />
