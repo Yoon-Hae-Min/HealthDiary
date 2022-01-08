@@ -10,8 +10,13 @@ const Navigator = ({ userObj, refreshUser }) => {
   const [selector, setSelector] = useState("home");
   return (
     <Tab.Container activeKey={selector}>
-      <Navbar fluid bg="dark" variant="dark" onSelect={(k) => setSelector(k)}>
-        <Nav fill variant="pills" style={{ width: "100%" }}>
+      <Navbar
+        fluid="true"
+        bg="dark"
+        variant="dark"
+        onSelect={(k) => setSelector(k)}
+      >
+        <Nav fill="true" variant="pills" style={{ width: "100%" }}>
           <Nav.Item>
             <Home />
           </Nav.Item>

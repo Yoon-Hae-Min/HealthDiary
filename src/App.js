@@ -1,4 +1,4 @@
-import HealthDiaryRouter from "component/Router";
+import HealthDiaryRouter from "component/HealthDiaryRouter";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "fbase";

@@ -8,7 +8,10 @@ const useCalender = () => {
     month: moment().month(), //현제 나타내는 개월보다 1작음
     date: moment().date(),
   };
-  const [date, setDate] = useState(currentDate);
+  const [dates, setDates] = useState(currentDate);
+  const [month, setMonth] = useState(currentDate.month);
+  const [date, setdate] = useState(currentDate.date);
+  const [year, setyear] = useState(currentDate.year);
 
   const getDatesOfCurrentMonth = () => {
     const calenderArr = [
@@ -28,20 +31,22 @@ const useCalender = () => {
     return returnArr;
   };
 
-  const firstDayOfThisMonth = moment([date.year, date.month, 1]).day();
-  const lastDayOfThisMonth = moment([date.year, 0, 31]).month(date.month).day();
-  const lastDateOfLastMonth = moment([date.year, 0, 31])
-    .month(date.month - 1)
+  const firstDayOfThisMonth = moment([dates.year, dates.month, 1]).day();
+  const lastDayOfThisMonth = moment([dates.year, 0, 31])
+    .month(dates.month)
+    .day();
+  const lastDateOfLastMonth = moment([dates.year, 0, 31])
+    .month(dates.month - 1)
     .date();
-  const lastDateOfThisMonth = moment([date.year, 0, 31])
-    .month(date.month)
+  const lastDateOfThisMonth = moment([dates.year, 0, 31])
+    .month(dates.month)
     .date();
 
   const pushArrOfLastDates = () => {
     let lastDates = lastDateOfLastMonth - firstDayOfThisMonth + 1;
-    const isJanuary = date.month === 0;
-    let lastMonth = date.month - 1;
-    let lastYear = date.year;
+    const isJanuary = dates.month === 0;
+    let lastMonth = dates.month - 1;
+    let lastYear = dates.year;
     if (isJanuary) {
       lastMonth = 11;
       lastYear -= 1;
@@ -56,14 +61,14 @@ const useCalender = () => {
   const pushArrOfCurrentDates = () => {
     const emptyArr = new Array(lastDateOfThisMonth);
     for (let i = 0; i < lastDateOfThisMonth; i++) {
-      emptyArr[i] = { ...date, date: i + 1 };
+      emptyArr[i] = { ...dates, date: i + 1 };
     }
     return emptyArr;
   };
   const pushArrOfNextDates = () => {
-    const isDecember = date.month === 11;
-    let nextMonth = date.month + 1;
-    let nextYear = date.year;
+    const isDecember = dates.month === 11;
+    let nextMonth = dates.month + 1;
+    let nextYear = dates.year;
     if (isDecember) {
       nextMonth = 0;
       nextYear += 1;
@@ -74,7 +79,13 @@ const useCalender = () => {
     }
     return emptyArr;
   };
-  return { date, setDate, getDatesOfCurrentMonth };
+  return {
+    Month: month,
+    setMonth: setMonth,
+    date: dates,
+    setDate: setDates,
+    getDatesOfCurrentMonth,
+  };
 };
 
 export default useCalender;

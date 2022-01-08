@@ -1,42 +1,27 @@
+import TodayToDo from "component/pages/TodayToDo";
 import style from "css/Date.module.css";
 import { db } from "fbase";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Toast } from "react-bootstrap";
 
-const Date = ({ date, istoday, DateClick, userObj }) => {
-  const [todayRecord, setTodayRecord] = useState("");
+const Date = ({ date, istoday, DateClick, userObj, toggleshowMode, memo }) => {
   const sendDateToParent = (event) => {
     DateClick(date);
+    toggleshowMode();
   };
-  const getData = async () => {
-    const todayRecordRef = doc(
-      db,
-      userObj.uid,
-      "Calender",
-      "record",
-      JSON.stringify(date)
-    );
-    const getTodayRecord = await getDoc(todayRecordRef);
-    if (getTodayRecord.exists()) {
-      setTodayRecord(getTodayRecord.data());
-    } else {
-      setTodayRecord("");
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, [date]);
-
+  //console.log(typeof date);
   return (
-    <div
-      onClick={sendDateToParent}
-      className={istoday ? style.today : "false"}
-      style={{ height: "12vh" }}
-    >
-      <h6>{date.date}</h6>
-      <p style={{ fontSize: "0.8em" }}>{todayRecord.workoutPart}</p>
-    </div>
+    <>
+      <div
+        onClick={sendDateToParent}
+        className={istoday ? style.today : "false"}
+        style={{ height: "12vh" }}
+      >
+        <h6>{date.date}</h6>
+        <p style={{ fontSize: "0.8em" }}>{memo && memo.data.workoutPart}</p>
+      </div>
+    </>
   );
 };
 

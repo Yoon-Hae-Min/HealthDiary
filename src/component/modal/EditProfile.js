@@ -60,7 +60,7 @@ const EditProfile = ({ editMode, toggleEditMode, userObj, refreshUser }) => {
   const photoUploadRef = useRef();
   return (
     <Modal isOpen={editMode} onRequestClose={toggleEditMode}>
-      <img src={userImg} />
+      <img src={userImg} alt="미리볼수 없음" />
       <FontAwesomeIcon icon={faImages} />
       <form onSubmit={ProfileSubmit}>
         <input type="file" onChange={changeImg} ref={photoUploadRef} />
