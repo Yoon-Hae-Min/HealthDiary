@@ -11,7 +11,6 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
   const [userName, setUserName] = useState(userObj.displayName);
   const [userGoal, setUserGoal] = useState("");
   const [userImg, setUserImg] = useState(userObj.photoURL);
-  const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     getDoc(doc(db, userObj.uid, "goal")).then((result) => {

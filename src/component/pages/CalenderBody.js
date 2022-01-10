@@ -14,16 +14,9 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
     month: moment().month(),
     date: moment().date(),
   };
-  const [clickedDate, setClickedDate] = useState(date);
-  const [todayTodoSwitch, setTodayTodoSwitch] = useState(false);
-  const [currentMonthDB, setCurrentMonthDB] = useState([]);
-  const DateClick = (date) => {
-    setClickedDate(date);
-  };
 
-  const toggleshowMode = () => {
-    setTodayTodoSwitch((pre) => !pre);
-  };
+  const [currentMonthDB, setCurrentMonthDB] = useState([]);
+
   useEffect(() => {
     // 이로직을Hook으로 따로 뽑아서 값을 return시켜서 랜더링을 안하도록 하기
     const a = async () => {
@@ -44,16 +37,14 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
             { date: doc.id, data: doc.data() },
           ]);
         });
-      } else {
-        setCurrentMonthDB([]);
       }
     };
+    setCurrentMonthDB([]);
     a();
   }, [date]);
   //console.log(currentMonthDB);
   //const a = currentMonthDB.find((item) => item.date === "12");
   //console.log(a);
-  console.log(clickedDate);
   return (
     <>
       <Row className="text-center border-bottom">
@@ -63,26 +54,7 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
           </Col>
         ))}
       </Row>
-      <Toast
-        onClose={toggleshowMode}
-        show={todayTodoSwitch}
-        style={{ position: "fixed" }}
-        position="top-start"
-      >
-        <Toast.Header>
-          <strong className="me-auto">운동기록</strong>
-          <small>11 mins ago</small>
-        </Toast.Header>
-        <Toast.Body>
-          <TodayToDo
-            userObj={userObj}
-            date={clickedDate}
-            memo={currentMonthDB.find(
-              (item) => item.date === String(clickedDate.date)
-            )}
-          />
-        </Toast.Body>
-      </Toast>
+
       {getDatesOfCurrentMonth().map((weeks) => (
         <Row className="align-items-start border-bottom">
           {weeks.map((eachDate, index) => (
@@ -102,8 +74,6 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
                   }
                   userObj={userObj}
                   key={index}
-                  DateClick={DateClick}
-                  toggleshowMode={toggleshowMode}
                 />
               }
             </Col>

@@ -10,7 +10,6 @@ const TodayToDo = ({ date, userObj, memo }) => {
   const toggleModifyMode = () => {
     setModifyMode((pre) => !pre);
   };
-  console.log(memo);
   return (
     <Card>
       <span>{`${date.year}년 ${date.month + 1}월 ${date.date}일`}</span>

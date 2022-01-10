@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Modal from "react-modal";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "fbase";
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Modal, Row } from "react-bootstrap";
 
 const ModifyTodayToDo = ({ modifyMode, toggleModifyMode, userObj, date }) => {
   //같은 부분 클릭하면 랜더링하는것 막기
@@ -36,28 +35,38 @@ const ModifyTodayToDo = ({ modifyMode, toggleModifyMode, userObj, date }) => {
     setWorkoutMemo(event.target.value);
   };
   return (
-    <Modal isOpen={modifyMode} onRequestClose={toggleModifyMode}>
-      <Row>
-        <Col>
-          <span>modal test</span>
-          <form onSubmit={onSubmut}>
-            <span>운동 부위</span>
-            <input
-              type="text"
-              placeholder="오늘 운동한 부위는?"
-              value={workoutPart}
-              onChange={workoutPartChange}
-            ></input>
-            <span>메모</span>
-            <textarea
-              value={workoutMemo}
-              onChange={workoutMemoChange}
-            ></textarea>
-            <input type="submit" value="수정하기"></input>
-          </form>
-          <button onClick={toggleModifyMode}>Close</button>
-        </Col>
-      </Row>
+    <Modal show={modifyMode} onHide={toggleModifyMode}>
+      <form onSubmit={onSubmut}>
+        <Modal.Header closeButton>
+          <Modal.Title>운동 기록하기</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          <Row>
+            <Col>
+              <span>운동 부위:</span>{" "}
+              <input
+                type="text"
+                placeholder="오늘 운동한 부위는?"
+                value={workoutPart}
+                onChange={workoutPartChange}
+              ></input>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <span>메모:</span>{" "}
+              <textarea
+                value={workoutMemo}
+                onChange={workoutMemoChange}
+              ></textarea>
+            </Col>
+          </Row>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type="submit">수정하기</Button>
+        </Modal.Footer>
+      </form>
     </Modal>
   );
 };

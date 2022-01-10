@@ -5,12 +5,17 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Card, Toast } from "react-bootstrap";
 
-const Date = ({ date, istoday, DateClick, userObj, toggleshowMode, memo }) => {
+const Date = ({ date, istoday, userObj, memo }) => {
+  const [todayTodoSwitch, setTodayTodoSwitch] = useState(false);
+  const [clickedDate, setClickedDate] = useState(date);
   const sendDateToParent = (event) => {
-    DateClick(date);
+    setClickedDate(date);
     toggleshowMode();
   };
   //console.log(typeof date);
+  const toggleshowMode = () => {
+    setTodayTodoSwitch((pre) => !pre);
+  };
 
   return (
     <>
@@ -22,6 +27,19 @@ const Date = ({ date, istoday, DateClick, userObj, toggleshowMode, memo }) => {
         <h6>{date.date}</h6>
         <p style={{ fontSize: "0.8em" }}>{memo && memo.data.workoutPart}</p>
       </div>
+      <Toast
+        className="position-absolute top-50 start-50 translate-middle"
+        onClose={toggleshowMode}
+        show={todayTodoSwitch}
+      >
+        <Toast.Header>
+          <strong className="me-auto">운동기록</strong>
+          <small>11 mins ago</small>
+        </Toast.Header>
+        <Toast.Body>
+          <TodayToDo userObj={userObj} date={clickedDate} memo={memo} />
+        </Toast.Body>
+      </Toast>
     </>
   );
 };
