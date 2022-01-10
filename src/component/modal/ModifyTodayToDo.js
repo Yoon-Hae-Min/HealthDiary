@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "fbase";
-import { Button, Col, Modal, Row } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 
 const ModifyTodayToDo = ({ modifyMode, toggleModifyMode, userObj, date }) => {
   //같은 부분 클릭하면 랜더링하는것 막기
@@ -36,37 +36,34 @@ const ModifyTodayToDo = ({ modifyMode, toggleModifyMode, userObj, date }) => {
   };
   return (
     <Modal show={modifyMode} onHide={toggleModifyMode}>
-      <form onSubmit={onSubmut}>
-        <Modal.Header closeButton>
-          <Modal.Title>운동 기록하기</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="text-center">
-          <Row>
-            <Col>
-              <span>운동 부위:</span>{" "}
-              <input
-                type="text"
-                placeholder="오늘 운동한 부위는?"
-                value={workoutPart}
-                onChange={workoutPartChange}
-              ></input>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
-              <span>메모:</span>{" "}
-              <textarea
-                value={workoutMemo}
-                onChange={workoutMemoChange}
-              ></textarea>
-            </Col>
-          </Row>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button type="submit">수정하기</Button>
-        </Modal.Footer>
-      </form>
+      <Modal.Header closeButton>
+        <Modal.Title>운동 기록하기</Modal.Title>
+      </Modal.Header>
+      <Modal.Body className="text-center">
+        <Form onSubmit={onSubmut}>
+          <Form.Group>
+            <Form.Label>운동 부위</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="오늘 운동한 부위는?"
+              value={workoutPart}
+              onChange={workoutPartChange}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>메모</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={5}
+              value={workoutMemo}
+              onChange={workoutMemoChange}
+            ></Form.Control>
+          </Form.Group>
+          <Button type="submit" className="mt-5">
+            수정하기
+          </Button>
+        </Form>
+      </Modal.Body>
     </Modal>
   );
 };

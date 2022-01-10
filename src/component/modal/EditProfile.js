@@ -5,7 +5,7 @@ import { auth, db, storage } from "fbase";
 import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { Button, Col, Image, Modal, Row } from "react-bootstrap";
+import { Button, Col, Form, Image, Modal, Row } from "react-bootstrap";
 
 const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
   const [userName, setUserName] = useState(userObj.displayName);
@@ -70,56 +70,40 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
         <Modal.Title>프로필 수정하기</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Row className="text-center">
-          <Col>
-            <label htmlFor="Imgfile">
+        <Form onSubmit={ProfileSubmit} className="text-center">
+          <Form.Group>
+            <Form.Label htmlFor="Imgfile">
               <Image
                 rounded
                 src={userImg}
                 alt="미리볼수 없음"
                 style={{ width: "64px", height: "64px" }}
               />
-            </label>
-          </Col>
-        </Row>
-        <Row md>
-          <Col className="text-center">
-            <form onSubmit={ProfileSubmit}>
-              <input
-                type="file"
-                id="Imgfile"
-                onChange={changeImg}
-                ref={photoUploadRef}
-                style={{ opacity: 0 }}
-              />
-              <Row className="pb-3">
-                <Col>
-                  <span>이름: </span>
-                  <input
-                    type="text"
-                    value={userName}
-                    onChange={changeName}
-                  ></input>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <span>목표: </span>
-                  <input
-                    type="text"
-                    value={userGoal}
-                    onChange={changeGoal}
-                  ></input>
-                </Col>
-              </Row>
-              <Row className="pt-3">
-                <Col>
-                  <Button type="submit">저장하기</Button>
-                </Col>
-              </Row>
-            </form>
-          </Col>
-        </Row>
+            </Form.Label>
+            <Form.Control
+              type="file"
+              id="Imgfile"
+              onChange={changeImg}
+              ref={photoUploadRef}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>이름</Form.Label>
+            <Form.Control type="text" value={userName} onChange={changeName} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>목표</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              value={userGoal}
+              onChange={changeGoal}
+            />
+          </Form.Group>
+          <Button type="submit" className="mt-3">
+            저장하기
+          </Button>
+        </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="danger" onClick={LogOut}>
