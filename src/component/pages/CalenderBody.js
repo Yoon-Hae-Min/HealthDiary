@@ -17,7 +17,6 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
   const [clickedDate, setClickedDate] = useState(date);
   const [todayTodoSwitch, setTodayTodoSwitch] = useState(false);
   const [currentMonthDB, setCurrentMonthDB] = useState([]);
-  const [DBInitalized, setDBInitalized] = useState(false);
   const DateClick = (date) => {
     setClickedDate(date);
   };
@@ -48,13 +47,13 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
       } else {
         setCurrentMonthDB([]);
       }
-      setDBInitalized(true);
     };
     a();
   }, [date]);
   //console.log(currentMonthDB);
   //const a = currentMonthDB.find((item) => item.date === "12");
   //console.log(a);
+  console.log(clickedDate);
   return (
     <>
       <Row className="text-center border-bottom">
@@ -75,14 +74,20 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
           <small>11 mins ago</small>
         </Toast.Header>
         <Toast.Body>
-          <TodayToDo userObj={userObj} date={clickedDate} />
+          <TodayToDo
+            userObj={userObj}
+            date={clickedDate}
+            memo={currentMonthDB.find(
+              (item) => item.date === String(clickedDate.date)
+            )}
+          />
         </Toast.Body>
       </Toast>
       {getDatesOfCurrentMonth().map((weeks) => (
         <Row className="align-items-start border-bottom">
           {weeks.map((eachDate, index) => (
             <Col style={{ padding: 0 }}>
-              {DBInitalized && (
+              {
                 <Date
                   memo={currentMonthDB.find(
                     (item) =>
@@ -100,7 +105,7 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
                   DateClick={DateClick}
                   toggleshowMode={toggleshowMode}
                 />
-              )}
+              }
             </Col>
           ))}
         </Row>

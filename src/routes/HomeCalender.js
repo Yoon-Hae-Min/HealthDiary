@@ -22,10 +22,6 @@ const Calender = ({ userObj }) => {
 
   console.log(date);
 
-  // logic 수정해야할것
-  // 데이터베이스에 경로를 calender->year->month->data(date,workoutPark,workoutMemo)로 변경 문제점: 앞,뒤달은 어떻게 처리할거? 그냥 보여주지말자
-  // 한달을 load할때마다 qeury로 그 월에 있는 데이터를 가져옴
-  // date를 비교해서 맞으면 데이터 calender에 개시
   return (
     <>
       {userObj && (

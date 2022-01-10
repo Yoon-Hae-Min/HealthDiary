@@ -2,22 +2,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import EditProfile from "../modal/EditProfile";
-import { Nav } from "react-bootstrap";
+import { Image, Nav } from "react-bootstrap";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "fbase";
 
 const ProFile = ({ userObj, refreshUser }) => {
   const [editMode, setEditMode] = useState(false);
+
   const toggleEditMode = () => {
     setEditMode((pre) => !pre);
   };
   return (
     <Nav.Link>
-      <FontAwesomeIcon //user이미지로 대체 해야함
-        icon={faUserCircle}
-        size={"2x"}
+      <Image
+        rounded
         onClick={toggleEditMode}
+        src={userObj.photoURL}
+        alt="미리볼수 없음"
+        style={{ width: "32px", height: "32px" }}
       />
       <EditProfile
-        refreshUser={refreshUser}
         editMode={editMode}
         toggleEditMode={toggleEditMode}
         userObj={userObj}
