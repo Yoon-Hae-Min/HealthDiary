@@ -13,9 +13,11 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
   const [userImg, setUserImg] = useState(userObj.photoURL);
 
   useEffect(() => {
-    getDoc(doc(db, userObj.uid, "goal")).then((result) => {
-      setUserGoal(result.data().userGoal);
-    });
+    getDoc(doc(db, userObj.uid, "userInformation"))
+      .then((result) => {
+        setUserGoal(result.data().userGoal);
+      })
+      .catch((e) => console.log(e));
   }, []);
 
   const changeName = (event) => {
@@ -47,7 +49,7 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
     event.preventDefault();
     if (userName !== userObj.userName) {
       await updateProfile(auth.currentUser, {
-        displayName: userName, //전부다 업데이트가 안되는데?
+        displayName: userName,
       });
     }
     if (userImg !== userObj.photoURL) {
@@ -57,7 +59,7 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
       await updateProfile(auth.currentUser, { photoURL: ImgUrl });
     }
     if (userGoal !== "") {
-      const docRef = doc(db, userObj.uid, "goal");
+      const docRef = doc(db, userObj.uid, "userInformation");
       setDoc(docRef, { userGoal: userGoal });
     }
     photoUploadRef.current.value = null;
@@ -99,6 +101,10 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
               value={userGoal}
               onChange={changeGoal}
             />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>유저 ID:</Form.Label>{" "}
+            <Form.Label>{userObj.uid}</Form.Label>
           </Form.Group>
           <Button type="submit" className="mt-3">
             저장하기

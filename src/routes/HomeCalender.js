@@ -1,5 +1,5 @@
 import Date from "component/atoms/Date";
-import TodayToDo from "component/pages/TodayToDo";
+import ToDidList from "component/pages/ToDidList";
 import Week from "component/atoms/Week";
 import useCalender from "Hook/useCalender";
 import moment from "moment";

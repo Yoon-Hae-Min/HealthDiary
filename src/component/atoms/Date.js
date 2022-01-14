@@ -1,4 +1,4 @@
-import TodayToDo from "component/pages/TodayToDo";
+import ToDidList from "component/pages/ToDidList";
 import style from "css/Date.module.css";
 import { db } from "fbase";
 import { doc, getDoc } from "firebase/firestore";
@@ -31,13 +31,13 @@ const Date = ({ date, istoday, userObj, memo }) => {
         className="position-absolute top-50 start-50 translate-middle"
         onClose={toggleshowMode}
         show={todayTodoSwitch}
+        bg="light"
       >
         <Toast.Header>
           <strong className="me-auto">운동기록</strong>
-          <small>11 mins ago</small>
         </Toast.Header>
         <Toast.Body>
-          <TodayToDo userObj={userObj} date={clickedDate} memo={memo} />
+          <ToDidList userObj={userObj} date={clickedDate} memo={memo} />
         </Toast.Body>
       </Toast>
     </>

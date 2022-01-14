@@ -1,6 +1,6 @@
 import { Col, Row, Toast } from "react-bootstrap";
 import Week from "component/atoms/Week";
-import TodayToDo from "./TodayToDo";
+import ToDidList from "./ToDidList";
 import Date from "component/atoms/Date";
 import moment from "moment";
 import { useEffect, useState } from "react";
@@ -41,6 +41,7 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
     };
     setCurrentMonthDB([]);
     a();
+    console.log("데이터를 가져왔습니다");
   }, [date]);
   //console.log(currentMonthDB);
   //const a = currentMonthDB.find((item) => item.date === "12");
