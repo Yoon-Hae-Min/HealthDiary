@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/HealthNote/static/css/main.4fb011d3.css",
-    "main.js": "/HealthNote/static/js/main.fd2f4c05.js",
+    "main.js": "/HealthNote/static/js/main.ae1947e3.js",
     "static/media/weakness.jpg": "/HealthNote/static/media/weakness.c7e4c8967a2a3f9f7b59.jpg",
     "static/media/goal.webp": "/HealthNote/static/media/goal.03c7a79e1c9132c19749.webp",
     "index.html": "/HealthNote/index.html",
     "main.4fb011d3.css.map": "/HealthNote/static/css/main.4fb011d3.css.map",
-    "main.fd2f4c05.js.map": "/HealthNote/static/js/main.fd2f4c05.js.map"
+    "main.ae1947e3.js.map": "/HealthNote/static/js/main.ae1947e3.js.map"
   },
   "entrypoints": [
     "static/css/main.4fb011d3.css",
-    "static/js/main.fd2f4c05.js"
+    "static/js/main.ae1947e3.js"
   ]
 }
