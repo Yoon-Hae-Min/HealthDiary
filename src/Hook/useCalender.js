@@ -10,8 +10,6 @@ const useCalender = () => {
   };
   const [dates, setDates] = useState(currentDate);
   const [month, setMonth] = useState(currentDate.month);
-  const [date, setdate] = useState(currentDate.date);
-  const [year, setyear] = useState(currentDate.year);
 
   const getDatesOfCurrentMonth = () => {
     const calenderArr = [

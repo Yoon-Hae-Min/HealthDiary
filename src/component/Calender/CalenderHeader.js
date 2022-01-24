@@ -5,30 +5,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row } from "react-bootstrap";
 
-const CalenderHeader = ({ date, setDate }) => {
-  const LastMonthClick = () => {
-    if (date.month <= 0) {
-      setDate((pre) => ({ year: pre.year - 1, month: 11, date: pre.date }));
-    } else {
-      setDate((pre) => ({
-        year: pre.year,
-        month: pre.month - 1,
-        date: pre.date,
-      }));
-    }
-  };
-
-  const NextMonthClick = () => {
-    if (date.month >= 11) {
-      setDate((pre) => ({ year: pre.year + 1, month: 0, date: pre.date }));
-    } else {
-      setDate((pre) => ({
-        year: pre.year,
-        month: pre.month + 1,
-        date: pre.date,
-      }));
-    }
-  };
+const CalenderHeader = ({ date, LastMonthClick, NextMonthClick }) => {
   return (
     <>
       <Row className="justify-content-center text-center">

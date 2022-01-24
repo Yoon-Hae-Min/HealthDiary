@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import EditProfile from "../modal/EditProfile";
+import EditProfile from "../EditProfile";
 import { Image, Nav } from "react-bootstrap";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "fbase";

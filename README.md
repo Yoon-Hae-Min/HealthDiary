@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# document
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+Beta ver 1.0 
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 개선사항
 
-### `npm run build`
+------
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**알고리즘 개선**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. 데이터베이스에서 가져오는 알고리즘 최적화(지금은 너무 호출을 많이함)
+2. redux 배운후 개선해보기
+3. 컴포넌트 호출빈도 보고 개선하기(처음 시작때 호출이 3번됨)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**cleanCode**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. 폴더명부터 적절한 이름으로 바꾸기
+2. 페이지별로 파일분할하기
+3. propTypes 추가하기
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+**추가 개발 아이디어 (기본적으로 트레이너 회원으로 분리)**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. 트레이너 userInfo에 체크로 선택하고 회원들을 연동할수 있게끔만들음
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   -> 트레이너는 회원정보에 운동 목표가 아닌 자기 소개글 같은것을 만들음
 
-### Code Splitting
+2. 트레이너들이 일지를 작성하게끔 만듬
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. 연동이 되었으면 트레이너 프로필사진과 다짐을 연동된 회원의 PT창에 개시함
 
-### Analyzing the Bundle Size
+4. 메모하는 textarea에 엔터키 사용불가
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+5. authchange를 이용해서 수정이 되면 바로 수정되게끔 만들기
 
-### Making a Progressive Web App
+6. today 표시 스타일 변경하기
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

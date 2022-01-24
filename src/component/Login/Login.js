@@ -56,7 +56,7 @@ const Login = ({ refreshUser }) => {
     await signInWithPopup(auth, provider);
   };
   return (
-    <Container className="align-items-center" style={{ height: "100vh" }}>
+    <Container style={{ height: "100vh" }}>
       <Row className="h-100 align-items-center">
         <Col>
           <Row>

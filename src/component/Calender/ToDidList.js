@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import ModifyTodayToDo from "../modal/ModifyTodayToDo";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "fbase";
 import { Button, Card } from "react-bootstrap";
+import ModifyToDidList from "./ModifyToDidList";
 
 const ToDidList = ({ date, userObj, memo }) => {
   //기록을 입력을 하고나서 바로 그날짜에 적용이안되고 한번 다시 눌러야 적용이됨
@@ -10,6 +10,7 @@ const ToDidList = ({ date, userObj, memo }) => {
   const toggleModifyMode = () => {
     setModifyMode((pre) => !pre);
   };
+  console.log(memo.data.workoutMemo);
   return (
     <Card bg="light" text="dark" border="light">
       <Card.Header className="text-center">
@@ -23,7 +24,10 @@ const ToDidList = ({ date, userObj, memo }) => {
               {memo.data.workoutPart}
             </Card.Text>
             <Card.Title className="text-center"> 메모</Card.Title>
-            <Card.Text className="text-center">
+            <Card.Text
+              className="text-center"
+              style={{ whiteSpace: "pre-wrap" }}
+            >
               {memo.data.workoutMemo}
             </Card.Text>
           </>
@@ -31,7 +35,7 @@ const ToDidList = ({ date, userObj, memo }) => {
       </Card.Body>
       <Button onClick={toggleModifyMode}>기록하기</Button>
       {
-        <ModifyTodayToDo
+        <ModifyToDidList
           userObj={userObj}
           date={date}
           modifyMode={modifyMode}

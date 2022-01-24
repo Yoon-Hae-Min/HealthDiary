@@ -3,7 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "fbase";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 
-const ModifyTodayToDo = ({ modifyMode, toggleModifyMode, userObj, date }) => {
+const ModifyToDidList = ({ modifyMode, toggleModifyMode, userObj, date }) => {
   //같은 부분 클릭하면 랜더링하는것 막기
   const [workoutPart, setWorkoutPart] = useState("");
   const [workoutMemo, setWorkoutMemo] = useState("");
@@ -68,4 +68,4 @@ const ModifyTodayToDo = ({ modifyMode, toggleModifyMode, userObj, date }) => {
   );
 };
 
-export default ModifyTodayToDo;
+export default ModifyToDidList;

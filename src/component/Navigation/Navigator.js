@@ -1,9 +1,9 @@
-import Home from "component/NavigationList/Home";
-import ProFile from "component/NavigationList/Profile";
-import PT from "component/NavigationList/PT";
-import PTList from "component/pages/PTList";
+import Home from "component/Navigation/NavigationItem/Home";
+import ProFile from "component/Navigation/NavigationItem/Profile";
+import PT from "component/Navigation/NavigationItem/PT";
+import PTList from "component/PT/PTList";
 import { useState } from "react";
-import HomeCalender from "routes/HomeCalender";
+import HomeCalender from "component/Calender/HomeCalender";
 import { Container, Nav, Navbar, Tab } from "react-bootstrap";
 
 const Navigator = ({ userObj, refreshUser }) => {
@@ -25,7 +25,6 @@ const Navigator = ({ userObj, refreshUser }) => {
           </Nav.Item>
           <Nav.Item>
             <ProFile userObj={userObj} refreshUser={refreshUser} />
-            {/* 여기부분 로직을 바꾸어야함 */}
           </Nav.Item>
         </Nav>
       </Navbar>
@@ -34,7 +33,7 @@ const Navigator = ({ userObj, refreshUser }) => {
           <HomeCalender userObj={userObj} />
         </Tab.Pane>
         <Tab.Pane eventKey="pt">
-          <PTList />
+          <PTList userObj={userObj} />
         </Tab.Pane>
       </Tab.Content>
     </Tab.Container>

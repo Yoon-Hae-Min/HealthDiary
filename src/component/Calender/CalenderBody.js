@@ -1,13 +1,19 @@
 import { Col, Row, Toast } from "react-bootstrap";
-import Week from "component/atoms/Week";
+import Week from "component/Calender/Week";
 import ToDidList from "./ToDidList";
-import Date from "component/atoms/Date";
+import Date from "component/Calender/Date";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "fbase";
 
-const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
+const CalenderBody = ({
+  date,
+  userObj,
+  getDatesOfCurrentMonth,
+  LastMonthClick,
+  NextMonthClick,
+}) => {
   const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
   const today = {
     year: moment().year(),
@@ -18,7 +24,6 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
   const [currentMonthDB, setCurrentMonthDB] = useState([]);
 
   useEffect(() => {
-    // 이로직을Hook으로 따로 뽑아서 값을 return시켜서 랜더링을 안하도록 하기
     const a = async () => {
       const q = query(
         collection(
@@ -67,7 +72,8 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
                       item.date === String(eachDate.date) &&
                       eachDate.month === date.month
                   )}
-                  date={eachDate}
+                  eachDate={eachDate}
+                  date={date}
                   istoday={
                     today.year === eachDate.year &&
                     today.month === eachDate.month &&
@@ -75,6 +81,8 @@ const CalenderBody = ({ date, userObj, getDatesOfCurrentMonth }) => {
                   }
                   userObj={userObj}
                   key={index}
+                  LastMonthClick={LastMonthClick}
+                  NextMonthClick={NextMonthClick}
                 />
               }
             </Col>
