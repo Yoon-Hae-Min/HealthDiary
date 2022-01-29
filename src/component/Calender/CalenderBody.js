@@ -1,7 +1,6 @@
 import { Col, Row, Toast } from "react-bootstrap";
 import Week from "component/Calender/Week";
-import ToDidList from "./ToDidList";
-import Date from "component/Calender/Date";
+import Date from "component/Calender/Date/Date";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { collection, getDocs, query } from "firebase/firestore";
@@ -11,8 +10,8 @@ const CalenderBody = ({
   date,
   userObj,
   getDatesOfCurrentMonth,
-  LastMonthClick,
-  NextMonthClick,
+  ViewLastMonth,
+  ViewNextMonth,
 }) => {
   const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
   const today = {
@@ -21,11 +20,11 @@ const CalenderBody = ({
     date: moment().date(),
   };
 
-  const [currentMonthDB, setCurrentMonthDB] = useState([]);
-
+  const [calenderDBImpo, setCalenderDBImpo] = useState([]);
+  // get Calender impormation in DB
   useEffect(() => {
-    const a = async () => {
-      const q = query(
+    const Init = async () => {
+      const calenderRef = query(
         collection(
           db,
           userObj.uid,
@@ -34,28 +33,24 @@ const CalenderBody = ({
         )
       );
 
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(calenderRef);
       if (!querySnapshot.empty) {
         querySnapshot.forEach((doc) => {
-          setCurrentMonthDB((pre) => [
+          setCalenderDBImpo((pre) => [
             ...pre,
             { date: doc.id, data: doc.data() },
           ]);
         });
       }
     };
-    setCurrentMonthDB([]);
-    a();
-    console.log("데이터를 가져왔습니다");
+    setCalenderDBImpo([]);
+    Init();
   }, [date]);
-  //console.log(currentMonthDB);
-  //const a = currentMonthDB.find((item) => item.date === "12");
-  //console.log(a);
   return (
     <>
       <Row className="text-center border-bottom">
         {weekArr.map((week, index) => (
-          <Col style={{ padding: 0 }}>
+          <Col>
             <Week name={week} key={index} />
           </Col>
         ))}
@@ -64,10 +59,10 @@ const CalenderBody = ({
       {getDatesOfCurrentMonth().map((weeks) => (
         <Row className="align-items-start border-bottom">
           {weeks.map((eachDate, index) => (
-            <Col style={{ padding: 0 }}>
+            <Col>
               {
                 <Date
-                  memo={currentMonthDB.find(
+                  memo={calenderDBImpo.find(
                     (item) =>
                       item.date === String(eachDate.date) &&
                       eachDate.month === date.month
@@ -81,8 +76,8 @@ const CalenderBody = ({
                   }
                   userObj={userObj}
                   key={index}
-                  LastMonthClick={LastMonthClick}
-                  NextMonthClick={NextMonthClick}
+                  ViewLastMonth={ViewLastMonth}
+                  ViewNextMonth={ViewNextMonth}
                 />
               }
             </Col>

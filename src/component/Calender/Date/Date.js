@@ -1,9 +1,10 @@
-import ToDidList from "component/Calender/ToDidList";
+import ToDidList from "component/Calender/Date/ToDidList";
 import style from "css/Date.module.css";
 import { db } from "fbase";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Card, Toast } from "react-bootstrap";
+import DateToast from "./DateToast";
 
 const Date = ({
   eachDate,
@@ -11,8 +12,8 @@ const Date = ({
   istoday,
   userObj,
   memo,
-  LastMonthClick,
-  NextMonthClick,
+  ViewLastMonth,
+  ViewNextMonth,
 }) => {
   const [toDidListSwitch, setToDidListSwitch] = useState(false);
   const DateClick = (event) => {
@@ -23,15 +24,14 @@ const Date = ({
       (date.year === eachDate.year && date.month > eachDate.month) ||
       date.year > eachDate.year
     ) {
-      LastMonthClick();
+      ViewLastMonth();
     } else if (
       (date.year === eachDate.year && date.month < eachDate.month) ||
       date.year < eachDate.year
     ) {
-      NextMonthClick();
+      ViewNextMonth();
     }
   };
-  //console.log(typeof date);
   const toggleshowMode = () => {
     setToDidListSwitch((pre) => !pre);
   };
@@ -45,22 +45,14 @@ const Date = ({
         <h6>{eachDate.date}</h6>
         <p style={{ fontSize: "0.8em" }}>{memo && memo.data.workoutPart}</p>
       </div>
-      {date.month === eachDate.month ? (
-        <Toast
-          className="position-absolute top-50 start-50 translate-middle"
-          onClose={toggleshowMode}
-          show={toDidListSwitch}
-          bg="light"
-        >
-          <Toast.Header>
-            <strong className="me-auto">운동기록</strong>
-          </Toast.Header>
-          <Toast.Body>
-            <ToDidList userObj={userObj} date={eachDate} memo={memo} />
-          </Toast.Body>
-        </Toast>
-      ) : (
-        <></>
+      {date.month === eachDate.month && (
+        <DateToast
+          toggleshowMode={toggleshowMode}
+          toDidListSwitch={toDidListSwitch}
+          userObj={userObj}
+          eachDate={eachDate}
+          memo={memo}
+        />
       )}
     </>
   );

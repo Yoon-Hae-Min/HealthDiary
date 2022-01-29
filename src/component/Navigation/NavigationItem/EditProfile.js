@@ -30,7 +30,6 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
     const {
       target: { files },
     } = event;
-    console.log(files);
     const theFile = files[0];
     const reader = new FileReader();
     reader.onloadend = (finished) => {
@@ -114,7 +113,7 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
       <Modal.Footer>
         <Button variant="danger" onClick={LogOut}>
           Log-Out
-        </Button>{" "}
+        </Button>
       </Modal.Footer>
     </Modal>
   );

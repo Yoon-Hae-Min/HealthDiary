@@ -3,20 +3,16 @@ import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-const WeaknessBodyModal = ({
-  switchWeaknessBodyModal,
-  toggleWeaknessBodyModal,
-  userObj,
-}) => {
+const WorkOutFocusModal = ({ modalswitch, toggleModal, userObj }) => {
   const [workOutFocus, setworkOutFocus] = useState("");
   const onSubmit = (event) => {
     event.preventDefault();
     const docRef = doc(db, userObj.uid, "userInformation");
     updateDoc(docRef, { workOutFocus: workOutFocus });
-    toggleWeaknessBodyModal();
+    toggleModal();
   };
   return (
-    <Modal show={switchWeaknessBodyModal} onHide={toggleWeaknessBodyModal}>
+    <Modal show={modalswitch} onHide={toggleModal}>
       <Form onSubmit={onSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>수정하기</Modal.Title>
@@ -31,7 +27,7 @@ const WeaknessBodyModal = ({
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={toggleWeaknessBodyModal}>
+          <Button variant="secondary" onClick={toggleModal}>
             Close
           </Button>
           <Button type="submit" variant="primary">
@@ -43,4 +39,4 @@ const WeaknessBodyModal = ({
   );
 };
 
-export default WeaknessBodyModal;
+export default WorkOutFocusModal;

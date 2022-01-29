@@ -3,7 +3,7 @@ import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 
-const PT = () => {
+const PTIcon = () => {
   //트레이너 이름도 추가해야함
   return (
     <Nav.Link eventKey="pt">
@@ -12,4 +12,4 @@ const PT = () => {
   );
 };
 
-export default PT;
+export default PTIcon;

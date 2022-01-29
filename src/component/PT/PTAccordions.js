@@ -27,11 +27,9 @@ const PTAccordions = ({ userObj }) => {
         orderBy("PTDate", "asc")
       );
       const querySnapshot = await getDocs(q);
-      console.log(querySnapshot);
       if (!querySnapshot.empty) {
         querySnapshot.forEach((doc) => {
           setPTLog((pre) => [...pre, { date: doc.id, log: doc.data() }]);
-          console.log(doc);
         });
       }
     };
@@ -61,9 +59,11 @@ const PTAccordions = ({ userObj }) => {
 
                     <Table striped bordered hover>
                       <thead>
-                        <th>set</th>
-                        <th>반복횟수</th>
-                        <th>무게</th>
+                        <tr>
+                          <th>set</th>
+                          <th>반복횟수</th>
+                          <th>무게</th>
+                        </tr>
                       </thead>
                       <tbody>
                         {list.set.map((set, index) => (

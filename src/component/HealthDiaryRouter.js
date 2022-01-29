@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Login from "component/Login/Login";
 import Navigator from "component/Navigation/Navigator";
-import PTList from "./PT/PTList";
+import PTList from "./PT/PTPage";
 
 const HealthDiaryRouter = ({ userObj, refreshUser }) => {
   return (

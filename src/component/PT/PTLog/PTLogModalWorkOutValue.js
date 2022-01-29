@@ -8,9 +8,9 @@ import {
   Form,
   Row,
 } from "react-bootstrap";
-import WorkOutFormList from "./WorkOutFormList";
+import WorkOutSet from "./WorkOutSet";
 
-const PTLogBodyValue = ({
+const PTLogModalWorkOutValue = ({
   index,
   workoutitem,
   setWorkOutList,
@@ -66,7 +66,7 @@ const PTLogBodyValue = ({
 
           <Accordion.Body>
             {workoutInputList.map((inputItem, index) => (
-              <WorkOutFormList
+              <WorkOutSet
                 inputItem={inputItem}
                 index={index}
                 workoutInputList={workoutInputList}
@@ -81,4 +81,4 @@ const PTLogBodyValue = ({
   );
 };
 
-export default PTLogBodyValue;
+export default PTLogModalWorkOutValue;

@@ -10,7 +10,6 @@ const ToDidList = ({ date, userObj, memo }) => {
   const toggleModifyMode = () => {
     setModifyMode((pre) => !pre);
   };
-  console.log(memo.data.workoutMemo);
   return (
     <Card bg="light" text="dark" border="light">
       <Card.Header className="text-center">

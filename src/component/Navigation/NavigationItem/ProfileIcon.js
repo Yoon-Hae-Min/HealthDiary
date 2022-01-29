@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import EditProfile from "../EditProfile";
+import EditProfile from "./EditProfile";
 import { Image, Nav } from "react-bootstrap";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "fbase";
 
-const ProFile = ({ userObj, refreshUser }) => {
+const ProFileIcon = ({ userObj, refreshUser }) => {
   const [editMode, setEditMode] = useState(false);
 
   const toggleEditMode = () => {
@@ -30,4 +30,4 @@ const ProFile = ({ userObj, refreshUser }) => {
   );
 };
 
-export default ProFile;
+export default ProFileIcon;

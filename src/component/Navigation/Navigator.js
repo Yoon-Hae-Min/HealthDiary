@@ -1,30 +1,30 @@
-import Home from "component/Navigation/NavigationItem/Home";
-import ProFile from "component/Navigation/NavigationItem/Profile";
-import PT from "component/Navigation/NavigationItem/PT";
-import PTList from "component/PT/PTList";
+import HomeIcon from "component/Navigation/NavigationItem/HomeIcon";
+import ProfileIcon from "component/Navigation/NavigationItem/ProfileIcon";
+import PTIcon from "component/Navigation/NavigationItem/PTIcon";
+import PTPage from "component/PT/PTPage";
 import { useState } from "react";
 import HomeCalender from "component/Calender/HomeCalender";
-import { Container, Nav, Navbar, Tab } from "react-bootstrap";
+import { Nav, Navbar, Tab } from "react-bootstrap";
 
 const Navigator = ({ userObj, refreshUser }) => {
-  const [selector, setSelector] = useState("home");
+  const [pageSelector, setPageSelector] = useState("home");
   return (
-    <Tab.Container activeKey={selector}>
+    <Tab.Container activeKey={pageSelector}>
       <Navbar
         fluid="true"
         bg="dark"
         variant="dark"
-        onSelect={(k) => setSelector(k)}
+        onSelect={(k) => setPageSelector(k)}
       >
         <Nav fill="true" variant="pills" style={{ width: "100%" }}>
           <Nav.Item>
-            <Home />
+            <HomeIcon />
           </Nav.Item>
           <Nav.Item>
-            <PT />
+            <PTIcon />
           </Nav.Item>
           <Nav.Item>
-            <ProFile userObj={userObj} refreshUser={refreshUser} />
+            <ProfileIcon userObj={userObj} refreshUser={refreshUser} />
           </Nav.Item>
         </Nav>
       </Navbar>
@@ -33,7 +33,7 @@ const Navigator = ({ userObj, refreshUser }) => {
           <HomeCalender userObj={userObj} />
         </Tab.Pane>
         <Tab.Pane eventKey="pt">
-          <PTList userObj={userObj} />
+          <PTPage userObj={userObj} />
         </Tab.Pane>
       </Tab.Content>
     </Tab.Container>

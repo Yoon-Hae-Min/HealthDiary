@@ -3,7 +3,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 
-const Home = () => {
+const HomeIcon = () => {
   return (
     <Nav.Link eventKey="home">
       <FontAwesomeIcon icon={faHome} size="2x" />
@@ -11,4 +11,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeIcon;

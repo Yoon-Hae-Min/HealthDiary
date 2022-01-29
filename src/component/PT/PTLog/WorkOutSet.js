@@ -1,6 +1,6 @@
-const { Row, Col, Form } = require("react-bootstrap");
+import { Col, Form, Row } from "react-bootstrap";
 
-const WorkOutFormList = ({
+const WorkOutSet = ({
   inputItem,
   index,
   setWorkOutInputList,
@@ -44,4 +44,4 @@ const WorkOutFormList = ({
   );
 };
 
-export default WorkOutFormList;
+export default WorkOutSet;

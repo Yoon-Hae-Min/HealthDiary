@@ -1,8 +1,5 @@
-import { useState } from "react";
 import { Accordion, Button, Col, Container, Form, Row } from "react-bootstrap";
-import PTLogBodyValue from "./PTLogBodyValue";
-import WorkOutFormList from "./WorkOutFormList";
-import moment from "moment";
+import PTLogModalWorkOutValue from "./PTLogModalWorkOutValue";
 
 const PTLogBody = ({
   setWorkOutList,
@@ -29,7 +26,6 @@ const PTLogBody = ({
       { value: "", set: [{ weight: "", number: "" }] },
     ]);
   };
-  console.log(workoutList);
   return (
     <>
       <Form.Group>
@@ -53,7 +49,7 @@ const PTLogBody = ({
         <Button onClick={addWorkOutValue}>운동종목 추가하기</Button>
         <Accordion defaultActiveKey={["0"]} alwaysOpen>
           {workoutList.map((workoutitem, index) => (
-            <PTLogBodyValue
+            <PTLogModalWorkOutValue
               index={index}
               workoutitem={workoutitem}
               setWorkOutList={setWorkOutList}

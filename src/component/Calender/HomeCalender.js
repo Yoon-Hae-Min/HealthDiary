@@ -1,17 +1,5 @@
-import Date from "component/Calender/Date";
-import ToDidList from "component/Calender/ToDidList";
-import Week from "component/Calender/Week";
 import useCalender from "Hook/useCalender";
-import moment from "moment";
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
 import { Card, Col, Container, Row, Table, Toast } from "react-bootstrap";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "fbase";
 import CalenderHeader from "component/Calender/CalenderHeader";
 import CalenderBody from "component/Calender/CalenderBody";
 
@@ -20,8 +8,7 @@ const Calender = ({ userObj }) => {
 
   const { date, setDate, getDatesOfCurrentMonth } = useCalender(); //month가 하루씩 당겨짐 ex 12월은 11월
 
-  console.log(date);
-  const LastMonthClick = () => {
+  const ViewLastMonth = () => {
     if (date.month <= 0) {
       setDate((pre) => ({ year: pre.year - 1, month: 11, date: pre.date }));
     } else {
@@ -33,7 +20,7 @@ const Calender = ({ userObj }) => {
     }
   };
 
-  const NextMonthClick = () => {
+  const ViewNextMonth = () => {
     if (date.month >= 11) {
       setDate((pre) => ({ year: pre.year + 1, month: 0, date: pre.date }));
     } else {
@@ -52,8 +39,8 @@ const Calender = ({ userObj }) => {
           <Container>
             <CalenderHeader
               date={date}
-              LastMonthClick={LastMonthClick}
-              NextMonthClick={NextMonthClick}
+              LastMonthClick={ViewLastMonth}
+              NextMonthClick={ViewNextMonth}
             />
             <Row>
               <Col md>
@@ -61,8 +48,8 @@ const Calender = ({ userObj }) => {
                   getDatesOfCurrentMonth={getDatesOfCurrentMonth}
                   userObj={userObj}
                   date={date}
-                  LastMonthClick={LastMonthClick}
-                  NextMonthClick={NextMonthClick}
+                  ViewLastMonth={ViewLastMonth}
+                  ViewNextMonth={ViewNextMonth}
                 />
               </Col>
             </Row>

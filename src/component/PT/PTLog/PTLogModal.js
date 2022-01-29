@@ -4,7 +4,7 @@ import moment from "moment";
 import { useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import PTLogBody from "./PTLogBody";
+import PTLogModalBody from "./PTLogModalBody";
 
 const PTLogModal = ({ show, handleClose, userObj }) => {
   const [workoutList, setWorkOutList] = useState([
@@ -30,7 +30,6 @@ const PTLogModal = ({ show, handleClose, userObj }) => {
       PTMemo: PTMemo,
     });
   };
-  console.log();
   return (
     <Modal show={show} onHide={handleClose}>
       <Form onSubmit={onSubmit}>
@@ -38,7 +37,7 @@ const PTLogModal = ({ show, handleClose, userObj }) => {
           <Modal.Title>PT일지 기록하기</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <PTLogBody
+          <PTLogModalBody
             workoutList={workoutList}
             setWorkOutList={setWorkOutList}
             PTDate={PTDate}
