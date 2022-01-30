@@ -6,6 +6,7 @@ import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Button, Col, Form, Image, Modal, Row } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
   const [userName, setUserName] = useState(userObj.displayName);
@@ -13,11 +14,15 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
   const [userImg, setUserImg] = useState(userObj.photoURL);
 
   useEffect(() => {
-    getDoc(doc(db, userObj.uid, "userInformation"))
-      .then((result) => {
+    const getUserGoal = async () => {
+      const result = await getDoc(doc(db, userObj.uid, "userInformation"));
+      if (result.exists()) {
         setUserGoal(result.data().userGoal);
-      })
-      .catch((e) => console.log(e));
+      } else {
+        setUserGoal("");
+      }
+    };
+    getUserGoal();
   }, []);
 
   const changeName = (event) => {
@@ -77,7 +82,7 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
               <Image
                 rounded
                 src={userImg}
-                alt="미리볼수 없음"
+                alt="유저 이미지를 설정해 주세요"
                 style={{ width: "64px", height: "64px" }}
               />
             </Form.Label>
@@ -117,6 +122,12 @@ const EditProfile = ({ editMode, toggleEditMode, userObj }) => {
       </Modal.Footer>
     </Modal>
   );
+};
+
+EditProfile.propTypes = {
+  editMode: PropTypes.bool.isRequired,
+  toggleEditMode: PropTypes.func.isRequired,
+  userObj: PropTypes.object.isRequired,
 };
 
 export default EditProfile;

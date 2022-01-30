@@ -2,6 +2,7 @@ import { db } from "fbase";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const WorkOutFocusModal = ({ modalswitch, toggleModal, userObj }) => {
   const [workOutFocus, setworkOutFocus] = useState("");
@@ -37,6 +38,12 @@ const WorkOutFocusModal = ({ modalswitch, toggleModal, userObj }) => {
       </Form>
     </Modal>
   );
+};
+
+WorkOutFocusModal.propTypes = {
+  modalswitch: PropTypes.bool,
+  toggleModal: PropTypes.func,
+  userObj: PropTypes.object,
 };
 
 export default WorkOutFocusModal;

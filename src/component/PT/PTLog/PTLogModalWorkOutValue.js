@@ -9,6 +9,7 @@ import {
   Row,
 } from "react-bootstrap";
 import WorkOutSet from "./WorkOutSet";
+import PropTypes from "prop-types";
 
 const PTLogModalWorkOutValue = ({
   index,
@@ -79,6 +80,13 @@ const PTLogModalWorkOutValue = ({
       </Form.Group>
     </Accordion.Item>
   );
+};
+
+PTLogModalWorkOutValue.propTypes = {
+  index: PropTypes.number,
+  workoutitem: PropTypes.object,
+  setWorkOutList: PropTypes.func,
+  workoutList: PropTypes.object,
 };
 
 export default PTLogModalWorkOutValue;

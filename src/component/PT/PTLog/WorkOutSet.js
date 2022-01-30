@@ -1,4 +1,5 @@
 import { Col, Form, Row } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const WorkOutSet = ({
   inputItem,
@@ -42,6 +43,13 @@ const WorkOutSet = ({
       </Col>
     </Row>
   );
+};
+
+WorkOutSet.propTypes = {
+  inputItem: PropTypes.object,
+  index: PropTypes.number,
+  setWorkOutInputList: PropTypes.func,
+  workoutInputList: PropTypes.object,
 };
 
 export default WorkOutSet;

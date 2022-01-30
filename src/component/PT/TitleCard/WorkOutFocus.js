@@ -12,11 +12,15 @@ const WorkOutFocus = ({ userObj }) => {
     setModalswitch((pre) => !pre);
   };
   useEffect(() => {
-    getDoc(doc(db, userObj.uid, "userInformation"))
-      .then((result) => {
+    const getUserWorkOutFocus = async () => {
+      const result = await getDoc(doc(db, userObj.uid, "userInformation"));
+      if (result.exists()) {
         setUserWorkOutFocus(result.data().workOutFocus);
-      })
-      .catch((e) => console.log(e));
+      } else {
+        setUserWorkOutFocus("중점적으로 해야할 운동을 설정해 주세요");
+      }
+    };
+    getUserWorkOutFocus();
   }, []);
   return (
     <>

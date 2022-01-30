@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import PTLogModalBody from "./PTLogModalBody";
+import PropTypes from "prop-types";
 
 const PTLogModal = ({ show, handleClose, userObj }) => {
   const [workoutList, setWorkOutList] = useState([
@@ -59,6 +60,12 @@ const PTLogModal = ({ show, handleClose, userObj }) => {
       </Form>
     </Modal>
   );
+};
+
+PTLogModal.propTypes = {
+  show: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  userObj: PropTypes.object.isRequired,
 };
 
 export default PTLogModal;

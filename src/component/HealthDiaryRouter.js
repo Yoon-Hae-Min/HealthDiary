@@ -6,15 +6,7 @@ import Login from "component/Login/Login";
 import Navigator from "component/Navigation/Navigator";
 import PTList from "./PT/PTPage";
 
-const HealthDiaryRouter = ({ userObj, refreshUser }) => {
-  return (
-    <>
-      {userObj ? (
-        <Navigator userObj={userObj} refreshUser={refreshUser} />
-      ) : (
-        <Login refreshUser={refreshUser} />
-      )}
-    </>
-  );
+const HealthDiaryRouter = ({ userObj }) => {
+  return <>{userObj ? <Navigator userObj={userObj} /> : <Login />}</>;
 };
 export default HealthDiaryRouter;

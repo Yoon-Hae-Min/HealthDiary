@@ -5,8 +5,8 @@ import PTPage from "component/PT/PTPage";
 import { useState } from "react";
 import HomeCalender from "component/Calender/HomeCalender";
 import { Nav, Navbar, Tab } from "react-bootstrap";
-
-const Navigator = ({ userObj, refreshUser }) => {
+import PropTypes from "prop-types";
+const Navigator = ({ userObj }) => {
   const [pageSelector, setPageSelector] = useState("home");
   return (
     <Tab.Container activeKey={pageSelector}>
@@ -24,7 +24,7 @@ const Navigator = ({ userObj, refreshUser }) => {
             <PTIcon />
           </Nav.Item>
           <Nav.Item>
-            <ProfileIcon userObj={userObj} refreshUser={refreshUser} />
+            <ProfileIcon userObj={userObj} />
           </Nav.Item>
         </Nav>
       </Navbar>
@@ -38,6 +38,10 @@ const Navigator = ({ userObj, refreshUser }) => {
       </Tab.Content>
     </Tab.Container>
   );
+};
+
+Navigator.propTypes = {
+  userObj: PropTypes.object.isRequired,
 };
 
 export default Navigator;

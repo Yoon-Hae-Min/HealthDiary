@@ -24,23 +24,10 @@ function App() {
       setFirebaseInitalized(true);
     });
   }, []);
-  const refreshUser = () => {
-    const user = auth.currentUser;
-    setUserObj({
-      displayName: user.displayName,
-      uid: user.uid,
-      photoURL: user.photoURL,
-      updateProfile: (args) => user.updateProfile(args),
-    });
-  };
   return (
     <>
       {firebaseInitalized ? (
-        <HealthDiaryRouter
-          isLogin={isLogin}
-          userObj={userObj}
-          refreshUser={refreshUser}
-        />
+        <HealthDiaryRouter isLogin={isLogin} userObj={userObj} />
       ) : (
         "Initailized"
       )}

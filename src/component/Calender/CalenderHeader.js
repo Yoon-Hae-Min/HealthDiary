@@ -4,6 +4,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const CalenderHeader = ({ date, LastMonthClick, NextMonthClick }) => {
   return (
@@ -28,6 +29,12 @@ const CalenderHeader = ({ date, LastMonthClick, NextMonthClick }) => {
       </Row>
     </>
   );
+};
+
+CalenderHeader.propTypes = {
+  date: PropTypes.object,
+  LastMonthClick: PropTypes.func,
+  NextMonthClick: PropTypes.func,
 };
 
 export default CalenderHeader;

@@ -5,6 +5,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "fbase";
+import PropTypes from "prop-types";
 
 const CalenderBody = ({
   date,
@@ -86,6 +87,14 @@ const CalenderBody = ({
       ))}
     </>
   );
+};
+
+CalenderBody.propTypes = {
+  date: PropTypes.object,
+  userObj: PropTypes.object,
+  getDatesOfCurrentMonth: PropTypes.func,
+  ViewLastMonth: PropTypes.func,
+  ViewNextMonth: PropTypes.func,
 };
 
 export default CalenderBody;

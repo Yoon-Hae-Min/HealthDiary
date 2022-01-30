@@ -1,5 +1,6 @@
 import { Accordion, Button, Col, Container, Form, Row } from "react-bootstrap";
 import PTLogModalWorkOutValue from "./PTLogModalWorkOutValue";
+import PropTypes from "prop-types";
 
 const PTLogBody = ({
   setWorkOutList,
@@ -69,6 +70,17 @@ const PTLogBody = ({
       </Form.Group>
     </>
   );
+};
+
+PTLogBody.propTypes = {
+  setWorkOutList: PropTypes.func,
+  workoutList: PropTypes.array,
+  PTDate: PropTypes.string,
+  setPTDate: PropTypes.func,
+  PTArea: PropTypes.string,
+  setPTArea: PropTypes.func,
+  PTMemo: PropTypes.string,
+  setPTMemo: PropTypes.func,
 };
 
 export default PTLogBody;

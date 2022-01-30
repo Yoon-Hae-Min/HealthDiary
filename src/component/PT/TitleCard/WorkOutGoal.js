@@ -7,11 +7,15 @@ import { Card } from "react-bootstrap";
 const WorkOutGoal = ({ userObj }) => {
   const [userGoal, setUserGoal] = useState("");
   useEffect(() => {
-    getDoc(doc(db, userObj.uid, "userInformation"))
-      .then((result) => {
+    const getUserGoal = async () => {
+      const result = await getDoc(doc(db, userObj.uid, "userInformation"));
+      if (result.exists()) {
         setUserGoal(result.data().userGoal);
-      })
-      .catch((e) => console.log(e));
+      } else {
+        setUserGoal("회원정보에서 목표를 설정해 주세요.");
+      }
+    };
+    getUserGoal();
   }, []);
   return (
     <Card>

@@ -10,14 +10,15 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-const {
+import {
   Accordion,
   Row,
   Col,
   Table,
   ListGroup,
   ListGroupItem,
-} = require("react-bootstrap");
+} from "react-bootstrap";
+
 const PTAccordions = ({ userObj }) => {
   const [PTLog, setPTLog] = useState([]);
   useEffect(() => {

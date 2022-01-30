@@ -7,18 +7,9 @@ import {
   FacebookAuthProvider,
 } from "firebase/auth";
 import { auth } from "fbase";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  Image,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
+import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 
-const Login = ({ refreshUser }) => {
+const Login = () => {
   const [createAccount, setCreateAccount] = useState(false);
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");

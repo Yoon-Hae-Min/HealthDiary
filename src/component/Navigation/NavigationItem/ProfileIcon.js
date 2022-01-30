@@ -1,12 +1,10 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import EditProfile from "./EditProfile";
 import { Image, Nav } from "react-bootstrap";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "fbase";
-
-const ProFileIcon = ({ userObj, refreshUser }) => {
+import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+const ProFileIcon = ({ userObj }) => {
   const [editMode, setEditMode] = useState(false);
 
   const toggleEditMode = () => {
@@ -14,13 +12,22 @@ const ProFileIcon = ({ userObj, refreshUser }) => {
   };
   return (
     <Nav.Link>
-      <Image
-        rounded
-        onClick={toggleEditMode}
-        src={userObj.photoURL}
-        alt="미리볼수 없음"
-        style={{ width: "32px", height: "32px" }}
-      />
+      {userObj.photoURL ? (
+        <Image
+          rounded
+          onClick={toggleEditMode}
+          src={userObj.photoURL}
+          alt="이미지 로딩 오류"
+          style={{ width: "32px", height: "32px" }}
+        />
+      ) : (
+        <FontAwesomeIcon
+          icon={faAddressCard}
+          size={"2x"}
+          onClick={toggleEditMode}
+        />
+      )}
+
       <EditProfile
         editMode={editMode}
         toggleEditMode={toggleEditMode}
@@ -28,6 +35,10 @@ const ProFileIcon = ({ userObj, refreshUser }) => {
       />
     </Nav.Link>
   );
+};
+
+ProFileIcon.propTypes = {
+  userObj: PropTypes.object.isRequired,
 };
 
 export default ProFileIcon;
